@@ -5,7 +5,6 @@ import * as jwt from "jsonwebtoken"
 import { v4 as uuidv4 } from "uuid"
 import { register, login } from "../utils/AuthUtil"
 
-
 const prisma = new PrismaClient()
 
 export default new class AuthService {

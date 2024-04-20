@@ -72,7 +72,6 @@ model Like {
   thread_id String
 }
 
-
 // UUID adlaah sebauh string yang berisi secaraka angka dan huruf, jadi ketika menggunakan UUID hasilnya tidak akan sama dengan yang lain
 // fbc27dd4-f90a-480f-a526-e49492978ee3
 // b654c9f0-1504-4478-b7c0-07cbd25187aa
