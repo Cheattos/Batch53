@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client"
 import { Request, Response } from "express"
-import { v4 as uuidv4 } from "uuid"
 import cloudinary from '../config'
 import * as fs from "fs"
 import { addthread } from "../utils/ThreadUtil"
@@ -18,8 +17,6 @@ export default new class ThreadService {
     private readonly UserRepository = prisma.user
     private readonly ThreadRepository = prisma.thread
     private readonly LikeRepository = prisma.like
-    private readonly ReplyRepository = prisma.reply
-    private readonly UserFollowingRepository = prisma.userFollowing
 
     async findAll(req: Request, res: Response): Promise<Response> {
         try {

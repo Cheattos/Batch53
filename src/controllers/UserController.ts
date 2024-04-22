@@ -8,6 +8,18 @@ export default new class UserController {
     findByID(req: Request, res: Response) {
         UserService.findByID(req, res)
     }
+    findByName(req: Request, res: Response) {
+        UserService.findByName(req, res)
+    }
+    updateWithoutImage(req: Request, res: Response) {
+        UserService.updateWithoutImage(req, res)
+    }
+    uploadProfilePicture(req: Request, res: Response) {
+        UserService.uploadProfilePicture(req, res)
+    }
+    getSuggestedUser(req: Request, res: Response) {
+        UserService.getSuggestedUser(req, res)
+    }
     delete(req: Request, res: Response) {
         UserService.delete(req, res)
     }

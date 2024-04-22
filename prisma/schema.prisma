@@ -31,6 +31,9 @@ model User {
   following       UserFollowing[] @relation(name: "Following")
 }
 
+// following = orang yg difollow
+// follower = kita
+
 model UserFollowing {
   id          String   @id @default(uuid())
   follower    User     @relation(name: "Follower", fields: [followerId], references: [id], onDelete: Cascade)

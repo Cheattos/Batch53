@@ -59,7 +59,6 @@ export default new class UserService {
         } catch (error) {
             console.log(error);
             return res.status(500).json(error)
-
         }
     }
 
