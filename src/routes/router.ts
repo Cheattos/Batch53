@@ -15,13 +15,14 @@ const router = express.Router()
 // Auth
 router.post("/register", AuthController.register)
 router.post("/login", AuthController.login)
-router.post("/logout", AuthController.logout)
+router.post("/logout", AuthMiddelware.Auth, AuthController.logout)
+router.post("/check", AuthMiddelware.Auth, AuthController.check)
 
 // Follow
-router.post('/follow/:followingId', FollowController.follow)
+router.post('/follow/:followingId', AuthMiddelware.Auth, FollowController.follow)
 
 // Like
-router.post('/thread/:threadId/like', LikeController.like)
+router.post('/thread/:threadId/like', AuthMiddelware.Auth, LikeController.like)
 
 // Reply
 router.post("/addreply/:threadId/reply", AuthMiddelware.Auth, upload.single('image'), ReplyController.addReply)
@@ -34,6 +35,9 @@ router.get('/findthreadbyid/:page', AuthMiddelware.Auth, ThreadController.findBy
 router.post("/addthread/:threadId", AuthMiddelware.Auth, upload.single('image'), ThreadController.addThread)
 router.post("/updatethread/:threadId", AuthMiddelware.Auth, upload.single('image'), ThreadController.updateThread)
 router.delete('/deletethread/:threadId', AuthMiddelware.Auth, ThreadController.deleteThread)
+
+// Thread Redis
+router.get('/threadredis/:page', AuthMiddelware.Auth, ThreadController.findAllRedis)
 
 // User
 router.get('/findUser', AuthMiddelware.Auth, UserController.findAll)

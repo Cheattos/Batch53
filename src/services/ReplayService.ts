@@ -32,18 +32,18 @@ export default new class ReplyService {
                 }
             })
 
-            if (!userSelected) return res.status(404).json({ error: "User no found" })
+            if (!userSelected) return res.status(404).json({ message: "User no found" })
 
             const threadSelected = await this.ThreadRepository.findUnique({
                 where: {
                     id: threadId
                 }
             })
-            if (!threadSelected) return res.status(404).json({ error: "Thread no found" })
+            if (!threadSelected) return res.status(404).json({ message: "Thread no found" })
 
             const body = req.body
             const { error } = addthread.validate(body)
-            if (error) return res.status(400).json(error.message)
+            if (error) return res.status(400).json({ message: error.message })
 
             const image = req.file
             let image_url = ""
@@ -87,7 +87,7 @@ export default new class ReplyService {
 
         } catch (error) {
             console.log(error);
-            return res.status(500).json(error)
+            return res.status(500).json({ message: error })
         }
     }
 
@@ -96,7 +96,7 @@ export default new class ReplyService {
             const { replyId, threadId } = req.params
 
             if (!isValidUUID(replyId) && !isValidUUID(threadId)) {
-                return res.status(400).json({ error: "Invalid UUID" })
+                return res.status(400).json({ message: "Invalid UUID" })
             }
 
             const userId = res.locals.loginSession.User.id
@@ -107,25 +107,25 @@ export default new class ReplyService {
                 }
             })
 
-            if (!userSelected) return res.status(404).json({ error: "User no found" })
+            if (!userSelected) return res.status(404).json({ message: "User no found" })
 
             const threadSelected = await this.ThreadRepository.findUnique({
                 where: {
                     id: threadId
                 }
             })
-            if (!threadSelected) return res.status(404).json({ error: "Thread no found" })
+            if (!threadSelected) return res.status(404).json({ message: "Thread no found" })
 
             const replySelected = await this.ReplyRepository.findUnique({
                 where: {
                     id: replyId
                 }
             })
-            if (!replySelected) return res.status(404).json({ error: "Reply no found" })
+            if (!replySelected) return res.status(404).json({ message: "Reply no found" })
 
             const body = req.body
             const { error } = addthread.validate(body)
-            if (error) return res.status(400).json(error.message)
+            if (error) return res.status(400).json({ message: error.message })
 
             const image = req.file
             let image_url = ""
@@ -169,7 +169,7 @@ export default new class ReplyService {
 
         } catch (error) {
             console.log(error);
-            return res.status(500).json(error)
+            return res.status(500).json({ message: error })
         }
     }
 
@@ -178,7 +178,7 @@ export default new class ReplyService {
             const replyId = req.params.replyId
 
             if (!isValidUUID(replyId)) {
-                return res.status(400).json({ error: "Invalid UUID" })
+                return res.status(400).json({ message: "Invalid UUID" })
             }
 
             const userId = res.locals.loginSession.User.id
@@ -186,7 +186,7 @@ export default new class ReplyService {
             const userSelect = await this.UserRepository.findUnique({
                 where: { id: userId }
             })
-            if (!userSelect) return res.status(404).json({ error: "User not found" })
+            if (!userSelect) return res.status(404).json({ message: "User not found" })
 
             const oldReplyData = await this.ReplyRepository.findUnique({
                 where: { id: replyId },
@@ -210,7 +210,7 @@ export default new class ReplyService {
             })
         } catch (error) {
             console.log(error);
-            return res.status(500).json(error)
+            return res.status(500).json({ message: error })
         }
     }
 }

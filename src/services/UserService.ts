@@ -41,7 +41,7 @@ export default new class UserService {
             const totalPages = Math.ceil(totalUsers / pageSize)
             // const totalPages = Math.floor(totalUsers / pageSize)
 
-            if (page > totalPages) return res.status(404).json({ error: "page not found" })
+            if (page > totalPages) return res.status(404).json({ message: "page not found" })
             // Ketika user melakukan input page melebihi kapasitas page yang tersedia
             // sistem akan mengeluarkan error bahwa halaman itu gak ada
 
@@ -55,10 +55,15 @@ export default new class UserService {
                 }
             }
 
-            return res.status(200).json(userss)
+            return res.status(200).json({
+                code: 200,
+                status: "Success",
+                message: "Find All User Success",
+                data: userss
+            })
         } catch (error) {
             console.log(error);
-            return res.status(500).json(error)
+            return res.status(500).json({ message: error })
         }
     }
 
@@ -67,7 +72,7 @@ export default new class UserService {
             const userId = req.params.userId
 
             if (!isValidUUID(userId)) {
-                return res.status(400).json({ error: "Invalid UUID" })
+                return res.status(400).json({ message: "Invalid UUID" })
             }
 
             const users = await this.UserRepository.findUnique({
@@ -83,13 +88,18 @@ export default new class UserService {
                 }
             })
 
-            if (!users) return res.status(404).json({ error: "User not found" })
+            if (!users) return res.status(404).json({ message: "User not found" })
 
-            return res.status(200).json({ users })
+            return res.status(200).json({
+                code: 200,
+                status: "Success",
+                message: "Find By ID User Success",
+                data: users
+            })
 
         } catch (error) {
             console.log(error);
-            return res.status(500).json(error)
+            return res.status(500).json({ message: error })
         }
     }
 
@@ -104,13 +114,18 @@ export default new class UserService {
                 }
             })
 
-            if (!user) return res.status(404).json({ error: "User not found" })
+            if (!user) return res.status(404).json({ message: "User not found" })
 
-            return res.status(200).json({ user })
+            return res.status(200).json({
+                code: 200,
+                status: "Success",
+                message: "Find By Name User Success",
+                data: user
+            })
 
         } catch (error) {
             console.log(error);
-            return res.status(500).json(error)
+            return res.status(500).json({ message: error })
         }
     }
 
@@ -119,22 +134,22 @@ export default new class UserService {
             const userId = req.params.userId
 
             if (!isValidUUID(userId)) {
-                return res.status(400).json({ error: "Invalid UUID" })
+                return res.status(400).json({ message: "Invalid UUID" })
             }
 
             const session = res.locals.loginSession.User.id
 
-            if (userId !== session) return res.status(403).json({ error: "Unauthorization : You're not user Login " })
+            if (userId !== session) return res.status(403).json({ message: "Unauthorization : You're not user Login " })
 
             const user = await this.UserRepository.findUnique({
                 where: { id: userId }
             })
 
-            if (!user) return res.status(404).json({ error: "User not found" })
+            if (!user) return res.status(404).json({ message: "User not found" })
 
             const body = req.body
             const { error } = update.validate(body)
-            if (error) return res.status(400).json(error.message)
+            if (error) return res.status(400).json({ message: error.message })
 
             let hashPassword = user.password
             let fullname = user.fullname
@@ -168,11 +183,16 @@ export default new class UserService {
                 }
             })
 
-            return res.status(200).json(updateUser)
+            return res.status(201).json({
+                code: 201,
+                status: "Success",
+                message: "Upload Data Profile Success",
+                data: updateUser
+            })
 
         } catch (error) {
             console.log(error);
-            return res.status(500).json(error)
+            return res.status(500).json({ message: error })
         }
     }
 
@@ -181,15 +201,15 @@ export default new class UserService {
             const userId = req.params.userId
 
             if (!isValidUUID(userId)) {
-                return res.status(400).json({ error: "Invalid UUID" })
+                return res.status(400).json({ message: "Invalid UUID" })
             }
 
             const session = res.locals.loginSession.User.id
 
-            if (userId !== session) return res.status(403).json({ error: "Unauthorization : You're not user Login " })
+            if (userId !== session) return res.status(403).json({ message: "Unauthorization : You're not user Login " })
 
             const image = req.file
-            if (!image) return res.status(400).json({ error: "No Imahe Provided" })
+            if (!image) return res.status(400).json({ message: "No Imahe Provided" })
 
             const oldUserData = await this.UserRepository.findUnique({
                 where: { id: userId },
@@ -216,11 +236,16 @@ export default new class UserService {
                 }
             })
 
-            return res.status(200).json(updateUser)
+            return res.status(201).json({
+                code: 201,
+                status: "Success",
+                message: "Upload Picture Profile Success",
+                data: updateUser
+            })
 
         } catch (error) {
             console.log(error);
-            return res.status(500).json(error)
+            return res.status(500).json({ message: error })
         }
     }
 
@@ -240,10 +265,15 @@ export default new class UserService {
                 }
             })
 
-            return res.status(200).json(users)
+            return res.status(200).json({
+                code: 200,
+                status: "Success",
+                message: "Get Suggested User Success",
+                data: users
+            })
         } catch (error) {
             console.log(error);
-            return res.status(500).json(error)
+            return res.status(500).json({ message: error })
         }
     }
 
@@ -252,12 +282,12 @@ export default new class UserService {
             const userId = req.params.userId
 
             if (!isValidUUID(userId)) {
-                return res.status(400).json({ error: "Invalid UUID" })
+                return res.status(400).json({ message: "Invalid UUID" })
             }
 
             const session = res.locals.loginSession.User.id
 
-            if (userId !== session) return res.status(403).json({ error: "Unauthorization : You're not user Login " })
+            if (userId !== session) return res.status(403).json({ message: "Unauthorization : You're not user Login " })
 
             const userDelete = await this.UserRepository.findUnique({
                 where: { id: userId },
@@ -268,7 +298,7 @@ export default new class UserService {
                 }
             })
 
-            if (!userDelete) return res.status(400).json({ error: "User not found" })
+            if (!userDelete) return res.status(400).json({ message: "User not found" })
 
             // Menghapus user delete untuk sesama user yang salaing folow
             await this.UserFollowingRepository.deleteMany({
@@ -290,10 +320,15 @@ export default new class UserService {
                 where: { id: userId }
             })
 
-            return res.status(200).json(deleteUser)
+            return res.status(200).json({
+                code: 200,
+                status: "Success",
+                message: "Delete User Success",
+                data: deleteUser
+            })
         } catch (error) {
             console.log(error);
-            return res.status(500).json(error)
+            return res.status(500).json({ message: error })
         }
     }
 
