@@ -1,5 +1,7 @@
 import { Request, Response } from "express"
 import ThreadService from "../services/ThreadService"
+import ThreadsQueue from "../queue/ThreadsQueue"
+
 
 export default new class AuthController {
     findAll(req: Request, res: Response) {
@@ -20,4 +22,10 @@ export default new class AuthController {
     findAllRedis(req: Request, res: Response) {
         ThreadService.findAllRedis(req, res)
     }
+
+    addThreadQueue(req: Request, res: Response) {
+        ThreadsQueue.addThreadQueue(req, res)
+    }
+
+    
 }

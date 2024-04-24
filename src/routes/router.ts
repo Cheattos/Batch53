@@ -33,8 +33,15 @@ router.delete('/deletereply/:replyId', AuthMiddelware.Auth, ReplyController.dele
 router.get('/findallthread/:page', AuthMiddelware.Auth, ThreadController.findAll)
 router.get('/findthreadbyid/:page', AuthMiddelware.Auth, ThreadController.findByID)
 router.post("/addthread/:threadId", AuthMiddelware.Auth, upload.single('image'), ThreadController.addThread)
+
+// ini upload gamabr banyak ke cloudinary
+
 router.post("/updatethread/:threadId", AuthMiddelware.Auth, upload.single('image'), ThreadController.updateThread)
 router.delete('/deletethread/:threadId', AuthMiddelware.Auth, ThreadController.deleteThread)
+
+// Thread Queue
+router.post("/addthreadqueue/:threadId", AuthMiddelware.Auth, upload.single('image'), ThreadController.addThreadQueue)
+
 
 // Thread Redis
 router.get('/threadredis/:page', AuthMiddelware.Auth, ThreadController.findAllRedis)
