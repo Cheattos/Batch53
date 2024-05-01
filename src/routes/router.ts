@@ -16,7 +16,7 @@ const router = express.Router()
 router.post("/register", AuthController.register)
 router.post("/login", AuthController.login)
 router.post("/logout", AuthMiddelware.Auth, AuthController.logout)
-router.post("/check", AuthMiddelware.Auth, AuthController.check)
+router.get("/check", AuthMiddelware.Auth, AuthController.check)
 
 // Follow
 router.post('/follow/:followingId', AuthMiddelware.Auth, FollowController.follow)
@@ -50,8 +50,9 @@ router.get('/threadredis/:page', AuthMiddelware.Auth, ThreadController.findAllRe
 router.get('/findUser', AuthMiddelware.Auth, UserController.findAll)
 router.get('/finduserbyid/:userId', AuthMiddelware.Auth, UserController.findByID)
 router.get('/finduserbyname/:name', AuthMiddelware.Auth, UserController.findByName)
-router.get('/userptofilenoimage/:userId', AuthMiddelware.Auth, UserController.updateWithoutImage)
-router.get('/userprofilewuthimage/:userId', AuthMiddelware.Auth, upload.single('image'), UserController.uploadProfilePicture)
+router.get('/getSuggested', AuthMiddelware.Auth, UserController.getSuggestedUser)
+router.post('/userprofilenoimage/:userId', AuthMiddelware.Auth, UserController.updateWithoutImage)
+router.post('/userprofilewithimage/:userId', AuthMiddelware.Auth, upload.single('image'), UserController.uploadProfilePicture)
 router.delete('/deleteUser/:userId', AuthMiddelware.Auth, UserController.delete)
 
 
