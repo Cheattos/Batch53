@@ -15,6 +15,8 @@ import {
 
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { Link } from "react-router-dom"
+import SidebarDrawer from "@/components/SidebarDrawer";
+
 
 export default function Main({ children }: { children: ReactNode }) {
     // children ini adalah sebuah parameter yang khusu ada pada react untuk menangani setiap komponen yang ada di react
@@ -65,7 +67,7 @@ export default function Main({ children }: { children: ReactNode }) {
                             </Link>
                         </DrawerHeader>
                         <DrawerBody mt={4} w={"100%"} p={0}>
-                            <p>Ini Drawer yang ngeslide</p>
+                            <SidebarDrawer closeDrawer={onClose} />
                         </DrawerBody>
                     </DrawerContent>
                 </Drawer>

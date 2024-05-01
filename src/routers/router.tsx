@@ -6,6 +6,7 @@ import RegisterPage from '@/pages/RegisterPage';
 import HomePage from '@/pages/HomePage';
 import { API } from '@/utils/api';
 import Main from '@/layout/Main';
+import SearchPage from '@/pages/SearchPage';
 
 function Router() {
     // menandakan proses pengecekan sedang dijalankan
@@ -79,6 +80,19 @@ function Router() {
                                     <IsLogin>
                                         <Main>
                                             <HomePage />
+                                        </Main>
+                                    </IsLogin>
+                                }
+                            />
+                        </Route>
+
+                        <Route path="/search">
+                            <Route
+                                index
+                                element={
+                                    <IsLogin>
+                                        <Main>
+                                            <SearchPage />
                                         </Main>
                                     </IsLogin>
                                 }
