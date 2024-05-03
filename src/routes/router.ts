@@ -51,8 +51,8 @@ router.get('/findUser', AuthMiddelware.Auth, UserController.findAll)
 router.get('/finduserbyid/:userId', AuthMiddelware.Auth, UserController.findByID)
 router.get('/finduserbyname/:name', AuthMiddelware.Auth, UserController.findByName)
 router.get('/getSuggested', AuthMiddelware.Auth, UserController.getSuggestedUser)
-router.post('/userprofilenoimage/:userId', AuthMiddelware.Auth, UserController.updateWithoutImage)
-router.post('/userprofilewithimage/:userId', AuthMiddelware.Auth, upload.single('image'), UserController.uploadProfilePicture)
+router.put('/userprofilenoimage/:userId', AuthMiddelware.Auth, UserController.updateWithoutImage)
+router.put('/userprofilewithimage/:userId', AuthMiddelware.Auth, upload.single('image'), UserController.uploadProfilePicture)
 router.delete('/deleteUser/:userId', AuthMiddelware.Auth, UserController.delete)
 
 
