@@ -69,7 +69,9 @@ export default new class ThreadService {
                     threads.pagination.totalPages == totalPages &&
                     findthreads.every((findthreads, index) =>
                         findthreads.content === threads.data[index].content &&
-                        findthreads.image === threads.data[index].image
+                        findthreads.image === threads.data[index].image &&
+                        findthreads.Like.length === threads.data[index].likes.length &&
+                        findthreads.replies.length === threads.data[index].replies.length 
                     )
                 ) {
                     // jika gak ada perubahan maka tampilkan data yang ada di redis
