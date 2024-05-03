@@ -1,29 +1,23 @@
 import { Fragment } from "react";
-import { Box, Button, Flex, Text } from "@chakra-ui/react"
-import { Link, useLocation, useNavigate } from "react-router-dom"
-import Swal from "sweetalert2"
-import { toast } from "react-toastify"
-import { useAppSelectore } from "@/redux/store";
-import { API } from "@/utils/api";
-import getError from "@/utils/getError";
+import { Box, Flex, Text } from "@chakra-ui/react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+// import { toast } from "react-toastify";
+import { BiLogOut } from "react-icons/bi";
+import { BsHouse, BsHouseFill } from "react-icons/bs";
+import { FaCircleUser, FaRegCircleUser } from "react-icons/fa6";
+import {
+    // RiDeleteBin5Fill,
+    RiUserSearchFill,
+    RiUserSearchLine,
+} from "react-icons/ri";
+// import getError from "@/utils/getError";
+// import { API } from "@/utils/api";
 import { jwtDecode } from 'jwt-decode'
 
-import { ImSearch } from "react-icons/im";
-import { RiSearchFill } from "react-icons/ri";
-
-import { IoHomeOutline, IoHome } from "react-icons/io5";
-import { CiLogout } from "react-icons/ci";
-
-import { FaUserAlt } from "react-icons/fa";
-import { FaRegUser } from "react-icons/fa";
-
-import {
-    RiDeleteBin5Fill,
-} from "react-icons/ri";
-
-interface SidebarDrawerInterface {
-    closeDrawer: () => void
-}
+// interface SidebarDrawerInterface {
+//     closeDrawer: () => void;
+// }
 
 interface User {
     id: string
@@ -33,11 +27,9 @@ interface JwtPayload {
     User: User
 }
 
-export default function SidebarDrawer(props: SidebarDrawerInterface) {
-    const navigate = useNavigate()
-    const location = useLocation()
-    const { data: profile } = useAppSelectore((state) => state.profile)
-
+export default function Sidebar() {
+    const navigate = useNavigate();
+    const location = useLocation();
     const jwtToken = localStorage.getItem("jwtToken");
     let idToken: string = "";
 
@@ -50,36 +42,36 @@ export default function SidebarDrawer(props: SidebarDrawerInterface) {
         }
     }
 
-    const deleteAccount = async () => {
-        try {
-            await API.delete(`deleteuser/${idToken}`, {
-                headers: {
-                    Authorization: `Bearer ${jwtToken}`,
-                },
-            });
+    // const deleteAccount = async () => {
+    //     try {
+    //         await API.delete(`deleteuser/${idToken}`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${jwtToken}`,
+    //             },
+    //         });
 
-            localStorage.clear();
-            navigate("/login");
-        } catch (error) {
-            toast.error(getError(error), {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-            });
-        }
-    };
+    //         localStorage.clear();
+    //         navigate("/login");
+    //     } catch (error) {
+    //         toast.error(getError(error), {
+    //             position: "top-center",
+    //             autoClose: 5000,
+    //             hideProgressBar: false,
+    //             closeOnClick: true,
+    //             pauseOnHover: true,
+    //             draggable: true,
+    //             progress: undefined,
+    //             theme: "colored",
+    //         });
+    //     }
+    // };
 
     return (
         <Fragment>
             <Box
-                py={10}
                 px={50}
-                borderRight={"3px solid #fffff"}
+                py={10}
+                borderRight={"3px solid #3a3a3a"}
                 overflow={"auto"}
                 className="hide-scroll"
                 color={"white"}
@@ -90,39 +82,43 @@ export default function SidebarDrawer(props: SidebarDrawerInterface) {
                         <Link to={"/"}>
                             <Box display={"flex"} alignItems={"center"} gap={3} mb={6}>
                                 <Text fontSize={"2xl"}>
-                                    {location.pathname === "/" ? <IoHome /> : <IoHomeOutline />
-                                    }
+                                    {location.pathname === "/" ? <BsHouseFill /> : <BsHouse />}
+                                    {/* Kalo kita ke halaman tersebut maka akan diubah menjadi homefill */}
                                 </Text>
                                 <Text fontSize={"md"} mt={1}>
                                     Home
                                 </Text>
                             </Box>
                         </Link>
-
                         <Link to={"/search"}>
                             <Box display={"flex"} alignItems={"center"} gap={3} mb={6}>
                                 <Text fontSize={"2xl"}>
-                                    {location.pathname === "/search" ? <RiSearchFill /> : <ImSearch />
-                                    }
+                                    {location.pathname === "/search" ? (
+                                        <RiUserSearchFill />
+                                    ) : (
+                                        <RiUserSearchLine />
+                                    )}
                                 </Text>
                                 <Text fontSize={"md"} mt={1}>
                                     Search
                                 </Text>
                             </Box>
                         </Link>
-
-                        <Link to={`/my-profile/${profile?.id}`}>
+                        <Link to={`/my-profile/${idToken}`}>
                             <Box display={"flex"} alignItems={"center"} gap={3} mb={6}>
                                 <Text fontSize={"2xl"}>
-                                    {location.pathname === "/my-profile" ? <FaUserAlt /> : <FaRegUser />
-                                    }
+                                    {location.pathname.includes("/my-profile") ? (
+                                        <FaCircleUser />
+                                    ) : (
+                                        <FaRegCircleUser />
+                                    )}
                                 </Text>
                                 <Text fontSize={"md"} mt={1}>
                                     My Profile
                                 </Text>
                             </Box>
                         </Link>
-                        <Button
+                        {/* <Button
                             onClick={() => {
                                 props.closeDrawer();
                                 Swal.fire({
@@ -152,32 +148,33 @@ export default function SidebarDrawer(props: SidebarDrawerInterface) {
                                 <RiDeleteBin5Fill />
                             </Text>
                             <Text fontSize={"md"}>Remove Account</Text>
-                        </Button>
+                        </Button> */}
                     </Box>
+
                     <Flex alignItems={"center"} gap={3} mb={6}>
                         <Text fontSize={"2xl"}>
-                            <CiLogout />
+                            <BiLogOut />
                         </Text>
                         <Text
                             fontSize={"md"}
                             mt={1}
                             cursor={"pointer"}
                             onClick={() => {
-                                props.closeDrawer()
+                                // props.closeDrawer();
                                 Swal.fire({
                                     title: "Are you sure?",
-                                    text: "You will logout form app",
+                                    text: "You Will Be Logged Out!",
                                     icon: "warning",
                                     showCancelButton: true,
-                                    confirmButtonColor: "#A3D8FF",
-                                    cancelButtonColor: "#FDFFC2",
-                                    confirmButtonText: "Yes, logout!"
-                                }).then((resault) => {
-                                    if (resault.isConfirmed) {
-                                        localStorage.clear()
-                                        navigate("/login")
+                                    confirmButtonColor: "#3085d6",
+                                    cancelButtonColor: "#d33",
+                                    confirmButtonText: "Yes, Logout!",
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        localStorage.clear();
+                                        navigate("/login");
                                     }
-                                })
+                                });
                             }}
                         >
                             Logout
@@ -186,6 +183,5 @@ export default function SidebarDrawer(props: SidebarDrawerInterface) {
                 </Flex>
             </Box>
         </Fragment>
-    )
+    );
 }
-

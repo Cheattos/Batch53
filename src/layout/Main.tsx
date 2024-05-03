@@ -16,6 +16,8 @@ import {
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { Link } from "react-router-dom"
 import SidebarDrawer from "@/components/SidebarDrawer";
+import Sidebar from "@/components/Sidebar";
+import Widget from "@/components/Widget";
 
 
 export default function Main({ children }: { children: ReactNode }) {
@@ -27,9 +29,9 @@ export default function Main({ children }: { children: ReactNode }) {
     return (
         <Fragment>
             <Flex color="white" h={"100vh"}>
-                <p>Ini Sidebar</p>
+                <Sidebar />
                 {children}
-                <p>Ini isi dari Profile, suggested, watermark</p>
+                <Widget />
 
                 <Button
                     display={{ base: "flex", lg: "none" }}

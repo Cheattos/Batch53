@@ -7,6 +7,8 @@ import HomePage from '@/pages/HomePage';
 import { API } from '@/utils/api';
 import Main from '@/layout/Main';
 import SearchPage from '@/pages/SearchPage';
+import ProfilePage from '@/pages/ProfilePage';
+import EditProfilePage from '@/pages/EditProfilePage';
 
 function Router() {
     // menandakan proses pengecekan sedang dijalankan
@@ -93,6 +95,45 @@ function Router() {
                                     <IsLogin>
                                         <Main>
                                             <SearchPage />
+                                        </Main>
+                                    </IsLogin>
+                                }
+                            />
+                        </Route>
+
+                        <Route path="/profile/:userId">
+                            <Route
+                                index
+                                element={
+                                    <IsLogin>
+                                        <Main>
+                                            <ProfilePage />
+                                        </Main>
+                                    </IsLogin>
+                                }
+                            />
+                        </Route>
+
+                        <Route path="/my-profile/:userId">
+                            <Route
+                                index
+                                element={
+                                    <IsLogin>
+                                        <Main>
+                                            <ProfilePage />
+                                        </Main>
+                                    </IsLogin>
+                                }
+                            />
+                        </Route>
+
+                        <Route path="/edit-profile">
+                            <Route
+                                index
+                                element={
+                                    <IsLogin>
+                                        <Main>
+                                            <EditProfilePage />
                                         </Main>
                                     </IsLogin>
                                 }

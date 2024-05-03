@@ -9,6 +9,19 @@ interface Login {
     password: string
 }
 
+interface FollowType {
+    id: string;
+    follower: FillFollower;
+    following: FillFollower;
+};
+
+interface FillFollower {
+    id: string,
+    username: string;
+    fullname: string;
+    profile_picture: string;
+}
+
 interface UserProfileType {
     id: string;
     username: string;
@@ -19,14 +32,8 @@ interface UserProfileType {
     bio: string;
     created_at: string;
     updated_at: string;
-    followers: FollowType[];
-    followings: FollowType[];
-}
-
-interface FollowType {
-    id: string;
-    follower: string;
-    following: string;
+    follower: FollowType[];
+    following: FollowType[];
 }
 
 interface SearchUserType {
@@ -39,4 +46,17 @@ interface SearchUserType {
     bio: string | null;
     created_at: string;
     updated_at: string;
+}
+
+interface Suggested {
+    id: string;
+    username: string;
+    fullname: string;
+    profile_picture: string;
+};
+
+interface EditProfileType {
+    fullname: string;
+    password: string;
+    bio: string;
 }

@@ -28,7 +28,7 @@ type AppDispatch = typeof store.dispatch
 export default store;
 // ini fungsinya untuk membagikan apa yang ada di store keseluruh aplikasi
 
-export const useAppSelectore : TypedUseSelectorHook<RootState> = useSelector
+export const useAppSelectore: TypedUseSelectorHook<RootState> = useSelector
 // berfungsi untuk milih bagian yang khusu dari state redux 
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
