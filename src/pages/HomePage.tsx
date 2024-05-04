@@ -1,8 +1,11 @@
-
+import Thread from "@/features/threads/components/Thread";
+import { Fragment } from "react";
 
 function HomePage() {
   return (
-    <div>Ini HomePage</div>
+    <Fragment>
+      <Thread />
+    </Fragment>
   )
 }
 

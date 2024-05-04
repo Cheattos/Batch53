@@ -60,3 +60,59 @@ interface EditProfileType {
     password: string;
     bio: string;
 }
+
+interface ThreadPostType {
+    content: string;
+    image?: File
+}
+
+interface ReplyPostType {
+    content: string;
+    image?: File
+    threadId?: string;
+}
+
+interface ThreadHomeType {
+    id: string;
+    content: string;
+    image: string;
+    created_at: string;
+    updated_at: string;
+    user: {
+        id: string;
+        username: string;
+        fullname: string;
+        profile_picture: string;
+    };
+    likes: ThreadLikeType[];
+    replies: {
+        length: number
+    };
+    isLiked: boolean;
+}
+
+interface ThreadLikeType {
+    id: string;
+    created_at: string;
+    updated_at: string;
+    user: {
+        id: string;
+        username: string;
+        fullname: string;
+        profile_picture: string;
+    };
+};
+
+interface ThreadReplyType {
+    id: string;
+    content: string;
+    image: string;
+    created_at: string;
+    updated_at: string;
+    user: {
+        id: string;
+        username: string;
+        fullname: string;
+        profile_picture: string;
+    };
+};

@@ -9,6 +9,7 @@ import Main from '@/layout/Main';
 import SearchPage from '@/pages/SearchPage';
 import ProfilePage from '@/pages/ProfilePage';
 import EditProfilePage from '@/pages/EditProfilePage';
+import ReplyPage from '@/pages/ReplyPage';
 
 function Router() {
     // menandakan proses pengecekan sedang dijalankan
@@ -82,6 +83,19 @@ function Router() {
                                     <IsLogin>
                                         <Main>
                                             <HomePage />
+                                        </Main>
+                                    </IsLogin>
+                                }
+                            />
+                        </Route>
+
+                        <Route path="/reply/:threadId">
+                            <Route
+                                index
+                                element={
+                                    <IsLogin>
+                                        <Main>
+                                            <ReplyPage />
                                         </Main>
                                     </IsLogin>
                                 }
