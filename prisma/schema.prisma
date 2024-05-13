@@ -27,8 +27,8 @@ model User {
   likes           Like[]
   threads         Thread[]
   replies         Reply[]
-  follower        UserFollowing[] @relation(name: "Follower")
-  following       UserFollowing[] @relation(name: "Following")
+  follower        UserFollowing[] @relation(name: "Following")
+  following       UserFollowing[] @relation(name: "Follower")
 }
 
 // following = orang yg difollow
